@@ -1,0 +1,12 @@
+/* Prowlarr indexer picker. Reuses core tokens (--panel-2, --faint, --font-mono). */
+.pw-idx__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
+.pw-idx__title { font-size: 13px; }
+.pw-idx { display: flex; flex-direction: column; gap: 2px; margin: 4px 0 2px; }
+.pw-idx__row { display: flex; align-items: center; gap: 9px; padding: 5px 6px; border-radius: 7px; cursor: pointer; }
+.pw-idx__row:hover { background: var(--panel-2); }
+.pw-idx__name { flex: 1; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pw-idx__proto { font: 600 9.5px var(--font-mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .04em; padding: 1px 6px; border-radius: 20px; border: 1px solid currentColor; flex: none; }
+.pw-idx__proto--usenet { color: #5fd38a; }
+.pw-idx__proto--torrent { color: #2bd4d9; }
+.pw-idx__proto--unknown { color: var(--faint); }
+.pw-idx__err { color: #f87171; }
