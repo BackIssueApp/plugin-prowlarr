@@ -8,6 +8,15 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-07-21
+
+### Added
+- **Category filter**: searches through Prowlarr indexers are now limited to
+  configurable Newznab/Torznab categories (default `7000,7030` — Books and
+  Comics), so general-purpose indexers stop returning movie/TV noise. A new
+  "Categories" field in the Prowlarr settings customises the list; leaving it
+  blank searches without a category filter (the old behaviour).
+
 ## [1.0.0] — 2026-07-18
 
 Initial release: point BackIssue at your Prowlarr instance and its indexers feed

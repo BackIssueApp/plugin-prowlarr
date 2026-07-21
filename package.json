@@ -1,6 +1,6 @@
 {
   "name": "prowlarr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Feed the Usenet and Torrent sources with the indexers your Prowlarr instance manages, with a per-indexer picker",
   "type": "module",
   "private": true,

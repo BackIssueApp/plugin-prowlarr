@@ -1,7 +1,7 @@
 // Network-free unit tests for the Prowlarr provider, with a mocked fetch.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { prowlarrConfigured, prowlarrProvider, prowlarrIndexerList, testProwlarr } from '../provider.js';
+import { prowlarrConfigured, prowlarrProvider, prowlarrIndexerList, testProwlarr, categoryFilter } from '../provider.js';
 
 const ok = (data) => ({ ok: true, status: 200, json: async () => data });
 
@@ -27,10 +27,21 @@ test('provider is inactive (empty, not exclusive) when unconfigured', async () =
 test('provider returns per-protocol feeds and is exclusive when configured', async () => {
   const nz = await prowlarrProvider.indexers(cfg(), 'newznab', { fetchImpl: async () => ok(INDEXERS) });
   assert.equal(nz.exclusive, true);
-  assert.deepEqual(nz.indexers, [{ name: 'Prowlarr: NZBgeek', url: 'http://p:9696/1/api', apiKey: 'KEY' }]);
+  assert.deepEqual(nz.indexers, [{ name: 'Prowlarr: NZBgeek', url: 'http://p:9696/1/api', apiKey: 'KEY', cat: '7000,7030' }]);
 
   const tz = await prowlarrProvider.indexers(cfg({ prowlarrUrl: 'http://p:9696' }), 'torznab', { fetchImpl: async () => ok(INDEXERS) });
   assert.deepEqual(tz.indexers.map((i) => i.name), ['Prowlarr: RARBG', 'Prowlarr: AnimeBytes']);
+});
+
+test('category filter: defaults to comics, honours custom + blank, drops junk', async () => {
+  assert.equal(categoryFilter({}), '7000,7030');
+  assert.equal(categoryFilter({ prowlarrCategories: '7030' }), '7030');
+  assert.equal(categoryFilter({ prowlarrCategories: ' 7000 , 7030 , abc ' }), '7000,7030');
+  assert.equal(categoryFilter({ prowlarrCategories: '' }), '');
+  const tz = await prowlarrProvider.indexers(cfg({ prowlarrCategories: '7030', prowlarrUrl: 'http://cats' }), 'torznab', { fetchImpl: async () => ok(INDEXERS) });
+  assert.ok(tz.indexers.every((i) => i.cat === '7030'));
+  const un = await prowlarrProvider.indexers(cfg({ prowlarrCategories: '', prowlarrUrl: 'http://uncat' }), 'torznab', { fetchImpl: async () => ok(INDEXERS) });
+  assert.ok(un.indexers.every((i) => i.cat === ''));
 });
 
 test('excluded ids are skipped', async () => {

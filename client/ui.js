@@ -18,6 +18,7 @@
         '<div id="prowlarr-config" class="src-config">' +
           '<label class="field"><span>Prowlarr URL</span><input id="set-prowlarrUrl" type="text" spellcheck="false" placeholder="http://prowlarr:9696"></label>' +
           '<label class="field"><span>API key</span><input id="set-prowlarrApiKey" type="text" spellcheck="false" autocomplete="off"></label>' +
+          '<label class="field"><span>Categories</span><input id="set-prowlarrCategories" type="text" spellcheck="false" placeholder="7000,7030"><span class="modal__note">Newznab/Torznab category ids searches are limited to (7000 = Books, 7030 = Comics). Blank searches without a category filter.</span></label>' +
           '<input id="set-prowlarrExcludeIds" type="hidden">' +
           '<div class="client-test"><button id="prowlarr-test" class="btn btn--ghost" type="button">Test connection</button><span id="prowlarr-test-result" class="client-status" hidden></span></div>' +
           '<div class="pw-idx__head"><b class="pw-idx__title">Indexers</b><button id="prowlarr-load" class="btn btn--ghost" type="button">Load</button></div>' +
@@ -101,6 +102,12 @@
     };
 
     // Auto-load the picker when settings open with Prowlarr already configured.
-    api.onSettingsLoad((s) => { if (s && s.prowlarrEnabled && s.prowlarrUrl && s.prowlarrApiKey) loadIndexers(); });
+    // Also seed the category filter's default: an untouched empty field would
+    // otherwise SAVE as "" (= no filter), silently defeating the 7000,7030 default.
+    api.onSettingsLoad((s) => {
+      const catEl = $('set-prowlarrCategories');
+      if (catEl && (!s || s.prowlarrCategories === undefined || s.prowlarrCategories === null)) catEl.value = '7000,7030';
+      if (s && s.prowlarrEnabled && s.prowlarrUrl && s.prowlarrApiKey) loadIndexers();
+    });
   });
 })();

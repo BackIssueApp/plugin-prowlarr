@@ -22,6 +22,16 @@ function excludeSet(config) {
   return new Set(String(config?.prowlarrExcludeIds || '').split(',').map((s) => s.trim()).filter(Boolean));
 }
 
+// Newznab/Torznab category filter applied to every Prowlarr indexer search.
+// Prowlarr fronts general-purpose indexers, so unscoped queries drown comic
+// results in movies/TV that happen to match a series title. Default: 7000
+// (Books parent) + 7030 (Comics). Blank = uncategorised (old behaviour).
+export function categoryFilter(config) {
+  const raw = config?.prowlarrCategories;
+  if (raw === undefined || raw === null) return '7000,7030';
+  return String(raw).split(',').map((s) => s.trim()).filter((s) => /^\d+$/.test(s)).join(',');
+}
+
 // Cache the RAW indexer list briefly so a burst of per-issue searches doesn't hit
 // Prowlarr on every call. Keyed by url+key. Exclusion filtering happens after the
 // cache so toggling indexers is instant.
@@ -51,9 +61,10 @@ async function indexersFor(config, protocol, fetchImpl) {
   const want = protocol === 'torznab' ? 'torrent' : 'usenet';
   const excluded = excludeSet(config);
   const out = [];
+  const cat = categoryFilter(config);
   for (const ix of await fetchRawIndexers(config, fetchImpl)) {
     if (ix.protocol !== want || excluded.has(String(ix.id))) continue;
-    out.push({ name: `Prowlarr: ${ix.name || ix.id}`, url: `${base(config)}/${ix.id}/api`, apiKey: config.prowlarrApiKey });
+    out.push({ name: `Prowlarr: ${ix.name || ix.id}`, url: `${base(config)}/${ix.id}/api`, apiKey: config.prowlarrApiKey, cat });
   }
   return out;
 }
