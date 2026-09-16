@@ -15,6 +15,9 @@ export default function register(api) {
     prowlarrUrl: { type: 'string', allowEmpty: true },       // e.g. http://prowlarr:9696
     prowlarrApiKey: { type: 'string', allowEmpty: true },
     prowlarrExcludeIds: { type: 'string', allowEmpty: true }, // CSV of ids to skip (blank = all)
+    // Newznab/Torznab category ids searches are limited to (blank = no filter).
+    // Registered so the value survives a save — core drops unknown keys.
+    prowlarrCategories: { type: 'string', allowEmpty: true },
   });
 
   api.registerClientAsset({ js: 'client/ui.js', css: 'client/ui.css' });
