@@ -1,0 +1,23 @@
+{
+  "intro": "Zasilaj źródła Usenet i Torrent indekserami zarządzanymi przez twoją instancję Prowlarr. Znajduje tylko wydania — nadal potrzebny jest klient pobierania.",
+  "url": "Adres Prowlarr",
+  "apiKey": "Klucz API",
+  "categories": "Kategorie",
+  "categoriesNote": "Identyfikatory kategorii Newznab/Torznab, do których ograniczone są wyszukiwania (7000 = Książki, 7030 = Komiksy). Puste pole oznacza wyszukiwanie bez filtra kategorii.",
+  "testConnection": "Testuj połączenie",
+  "indexers": "Indeksery",
+  "load": "Wczytaj",
+  "keyNote": "Klucz API znajdziesz w Prowlarr w <b>Settings → General → Security</b>. Wybierz powyżej indeksery do użycia — używane są wszystkie, dopóki nie odznaczysz niektórych. Gdy ta opcja jest włączona, ręcznie wpisane indeksery są pomijane.",
+  "noIndexers": "Nie znaleziono włączonych indekserów — dodaj i włącz je w Prowlarr.",
+  "enterUrl": "Najpierw wpisz adres Prowlarr.",
+  "loading": "Wczytywanie…",
+  "loadFailed": "Nie udało się wczytać indekserów.",
+  "testing": "Testowanie…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "Zasilaj źródła Usenet i Torrent indekserami zarządzanymi przez twoją instancję Prowlarr, z wyborem poszczególnych indekserów"
+      }
+    }
+  }
+}

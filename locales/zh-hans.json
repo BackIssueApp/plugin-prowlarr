@@ -1,0 +1,23 @@
+{
+  "intro": "用你的 Prowlarr 实例管理的索引器为 Usenet 和 Torrent 来源提供数据。它只负责查找发布，仍需要下载客户端。",
+  "url": "Prowlarr 地址",
+  "apiKey": "API 密钥",
+  "categories": "分类",
+  "categoriesNote": "限定搜索范围的 Newznab/Torznab 分类 ID（7000 = 图书，7030 = 漫画）。留空则不按分类筛选。",
+  "testConnection": "测试连接",
+  "indexers": "索引器",
+  "load": "加载",
+  "keyNote": "API 密钥位于 Prowlarr 的 <b>Settings → General → Security</b>。在上方选择要使用的索引器——取消勾选之前会全部使用。启用后，手动填写的索引器将被忽略。",
+  "noIndexers": "未找到已启用的索引器——请在 Prowlarr 中添加并启用。",
+  "enterUrl": "请先填写 Prowlarr 地址。",
+  "loading": "加载中…",
+  "loadFailed": "索引器加载失败。",
+  "testing": "测试中…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "用你的 Prowlarr 实例管理的索引器为 Usenet 和 Torrent 来源提供数据，可逐个选择索引器"
+      }
+    }
+  }
+}

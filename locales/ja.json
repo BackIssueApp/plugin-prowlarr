@@ -1,0 +1,23 @@
+{
+  "intro": "Prowlarr が管理するインデクサーを Usenet と Torrent のソースに提供します。リリースを探すだけなので、ダウンロードクライアントは別途必要です。",
+  "url": "Prowlarr の URL",
+  "apiKey": "API キー",
+  "categories": "カテゴリ",
+  "categoriesNote": "検索対象を絞り込む Newznab/Torznab のカテゴリ ID です（7000 = 書籍、7030 = コミック）。空欄の場合はカテゴリで絞り込まずに検索します。",
+  "testConnection": "接続をテスト",
+  "indexers": "インデクサー",
+  "load": "読み込む",
+  "keyNote": "API キーは Prowlarr の <b>Settings → General → Security</b> にあります。使用するインデクサーを上で選んでください。選択を外すまではすべて使用されます。有効にしている間は、手動で入力したインデクサーは無視されます。",
+  "noIndexers": "有効なインデクサーが見つかりません。Prowlarr で追加して有効にしてください。",
+  "enterUrl": "先に Prowlarr の URL を入力してください。",
+  "loading": "読み込み中…",
+  "loadFailed": "インデクサーを読み込めませんでした。",
+  "testing": "テスト中…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "Prowlarr が管理するインデクサーを Usenet と Torrent のソースに提供します（インデクサーごとに選択可能）"
+      }
+    }
+  }
+}
