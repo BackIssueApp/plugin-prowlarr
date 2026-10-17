@@ -12,5 +12,12 @@
   "enterUrl": "Voer eerst een Prowlarr-URL in.",
   "loading": "Laden…",
   "loadFailed": "Indexers konden niet worden geladen.",
-  "testing": "Testen…"
+  "testing": "Testen…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "De Usenet- en Torrent-bronnen voeden met de indexers die je Prowlarr-instantie beheert, met een keuze per indexer"
+      }
+    }
+  }
 }

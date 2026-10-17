@@ -12,5 +12,12 @@
   "enterUrl": "Saisissez d’abord une URL Prowlarr.",
   "loading": "Chargement…",
   "loadFailed": "Impossible de charger les indexeurs.",
-  "testing": "Test en cours…"
+  "testing": "Test en cours…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "Alimenter les sources Usenet et Torrent avec les indexeurs gérés par votre instance Prowlarr, avec un sélecteur par indexeur"
+      }
+    }
+  }
 }

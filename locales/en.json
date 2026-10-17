@@ -12,5 +12,12 @@
   "enterUrl": "Enter a Prowlarr URL first.",
   "loading": "Loading…",
   "loadFailed": "Failed to load indexers.",
-  "testing": "Testing…"
+  "testing": "Testing…",
+  "_shared": {
+    "plugins": {
+      "prowlarr": {
+        "description": "Feed the Usenet and Torrent sources with the indexers your Prowlarr instance manages, with a per-indexer picker"
+      }
+    }
+  }
 }
