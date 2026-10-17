@@ -6,6 +6,22 @@
   const $ = (id) => document.getElementById(id);
 
   window.BackIssue.registerClient((api) => {
+    // Translations: api.t when the host has it (BackIssue > 0.9.0), the inline
+    // English otherwise. Catalog keys live under locales/<lang>.json.
+    const NS = 'prowlarr.';
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fill = (s, p) => (p ? String(s).replace(/\{(\w+)\}/g, (m, k) => (p[k] === undefined || p[k] === null ? m : String(p[k]))) : String(s));
+    const tr = (key, en, params) => { if (typeof api.t !== 'function') return fill(en, params); const v = api.t(NS + key, params); return v === NS + key ? fill(en, params) : v; };
+    // innerHTML variant: params escaped, only simple inline tags pass through.
+    const trh = (key, en, params) => {
+      if (typeof api.th === 'function' && api.t(NS + key) !== NS + key) return api.th(NS + key, params);
+      const tokens = params ? Object.fromEntries(Object.keys(params).map((k) => [k, '\u0000' + k + '\u0000'])) : undefined;
+      let html = esc(fill(en, tokens)).replace(/&lt;(\/?)(b|i|em|strong|code|br|kbd)&gt;/g, '<$1$2>');
+      if (params) for (const [k, v] of Object.entries(params)) html = html.split('\u0000' + k + '\u0000').join(esc(v ?? ''));
+      return html;
+    };
+    const te = (key, en, params) => esc(tr(key, en, params));
+
     const src = api.slot('settings-plugin-sources');
     if (src && !$('set-prowlarrEnabled')) {
       const block = document.createElement('div');
@@ -13,17 +29,17 @@
       block.innerHTML =
         '<div class="src-toggle">' +
           '<label class="switch"><input id="set-prowlarrEnabled" type="checkbox"><span class="switch__track"></span></label>' +
-          '<div class="src-toggle__text"><b>Prowlarr</b><span class="modal__note src-toggle__note">Feed the Usenet and Torrent sources with the indexers your Prowlarr instance manages. Finds releases only — a download client is still needed.</span></div>' +
+          '<div class="src-toggle__text"><b>Prowlarr</b><span class="modal__note src-toggle__note">' + te('intro', 'Feed the Usenet and Torrent sources with the indexers your Prowlarr instance manages. Finds releases only — a download client is still needed.') + '</span></div>' +
         '</div>' +
         '<div id="prowlarr-config" class="src-config">' +
-          '<label class="field"><span>Prowlarr URL</span><input id="set-prowlarrUrl" type="text" spellcheck="false" placeholder="http://prowlarr:9696"></label>' +
-          '<label class="field"><span>API key</span><input id="set-prowlarrApiKey" type="text" spellcheck="false" autocomplete="off"></label>' +
-          '<label class="field"><span>Categories</span><input id="set-prowlarrCategories" type="text" spellcheck="false" placeholder="7000,7030"><span class="modal__note">Newznab/Torznab category ids searches are limited to (7000 = Books, 7030 = Comics). Blank searches without a category filter.</span></label>' +
+          '<label class="field"><span>' + te('url', 'Prowlarr URL') + '</span><input id="set-prowlarrUrl" type="text" spellcheck="false" placeholder="http://prowlarr:9696"></label>' +
+          '<label class="field"><span>' + te('apiKey', 'API key') + '</span><input id="set-prowlarrApiKey" type="text" spellcheck="false" autocomplete="off"></label>' +
+          '<label class="field"><span>' + te('categories', 'Categories') + '</span><input id="set-prowlarrCategories" type="text" spellcheck="false" placeholder="7000,7030"><span class="modal__note">' + te('categoriesNote', 'Newznab/Torznab category ids searches are limited to (7000 = Books, 7030 = Comics). Blank searches without a category filter.') + '</span></label>' +
           '<input id="set-prowlarrExcludeIds" type="hidden">' +
-          '<div class="client-test"><button id="prowlarr-test" class="btn btn--ghost" type="button">Test connection</button><span id="prowlarr-test-result" class="client-status" hidden></span></div>' +
-          '<div class="pw-idx__head"><b class="pw-idx__title">Indexers</b><button id="prowlarr-load" class="btn btn--ghost" type="button">Load</button></div>' +
+          '<div class="client-test"><button id="prowlarr-test" class="btn btn--ghost" type="button">' + te('testConnection', 'Test connection') + '</button><span id="prowlarr-test-result" class="client-status" hidden></span></div>' +
+          '<div class="pw-idx__head"><b class="pw-idx__title">' + te('indexers', 'Indexers') + '</b><button id="prowlarr-load" class="btn btn--ghost" type="button">' + te('load', 'Load') + '</button></div>' +
           '<div id="prowlarr-idx" class="pw-idx"></div>' +
-          '<p class="modal__note">The API key is in Prowlarr under <b>Settings → General → Security</b>. Choose which indexers to use above — all are used until you deselect some. While enabled, your manually entered indexers are ignored.</p>' +
+          '<p class="modal__note">' + trh('keyNote', 'The API key is in Prowlarr under <b>Settings → General → Security</b>. Choose which indexers to use above — all are used until you deselect some. While enabled, your manually entered indexers are ignored.') + '</p>' +
         '</div>';
       src.appendChild(block);
     }
@@ -56,7 +72,7 @@
     function renderIndexers(list) {
       const ex = excludeSet();
       idxBox.innerHTML = '';
-      if (!list.length) { idxBox.innerHTML = '<p class="modal__note">No enabled indexers found — add and enable some in Prowlarr.</p>'; return; }
+      if (!list.length) { idxBox.innerHTML = '<p class="modal__note">' + te('noIndexers', 'No enabled indexers found — add and enable some in Prowlarr.') + '</p>'; return; }
       for (const ix of list) {
         const row = document.createElement('label');
         row.className = 'pw-idx__row';
@@ -81,19 +97,19 @@
 
     async function loadIndexers() {
       const url = urlEl.value.trim();
-      if (!url) { idxBox.innerHTML = '<p class="modal__note">Enter a Prowlarr URL first.</p>'; return; }
-      idxBox.innerHTML = '<p class="modal__note">Loading…</p>';
+      if (!url) { idxBox.innerHTML = '<p class="modal__note">' + te('enterUrl', 'Enter a Prowlarr URL first.') + '</p>'; return; }
+      idxBox.innerHTML = '<p class="modal__note">' + te('loading', 'Loading…') + '</p>';
       let r;
       try { r = await api.post('/api/prowlarr/indexers', { url, apiKey: keyEl.value.trim() }); }
       catch (e) { r = { error: String(e) }; }
       if (r && Array.isArray(r.indexers)) renderIndexers(r.indexers);
-      else idxBox.innerHTML = '<p class="modal__note pw-idx__err">' + api.escapeHtml((r && r.error) || 'Failed to load indexers.') + '</p>';
+      else idxBox.innerHTML = '<p class="modal__note pw-idx__err">' + api.escapeHtml((r && r.error) || tr('loadFailed', 'Failed to load indexers.')) + '</p>';
     }
     $('prowlarr-load').onclick = loadIndexers;
 
     $('prowlarr-test').onclick = async () => {
       const el = $('prowlarr-test-result');
-      el.hidden = false; el.className = 'client-status is-testing'; el.textContent = 'Testing…';
+      el.hidden = false; el.className = 'client-status is-testing'; el.textContent = tr('testing', 'Testing…');
       let r;
       try { r = await api.post('/api/prowlarr/test', { url: urlEl.value.trim(), apiKey: keyEl.value.trim() }); }
       catch (e) { r = { ok: false, message: String(e) }; }

@@ -1,0 +1,16 @@
+{
+  "intro": "Voedt de Usenet- en Torrent-bronnen met de indexers die je Prowlarr-instantie beheert. Vindt alleen releases — een downloadclient blijft nodig.",
+  "url": "Prowlarr-URL",
+  "apiKey": "API-sleutel",
+  "categories": "Categorieën",
+  "categoriesNote": "Newznab/Torznab-categorie-id's waartoe zoekopdrachten beperkt worden (7000 = Boeken, 7030 = Strips). Leeg zoekt zonder categoriefilter.",
+  "testConnection": "Verbinding testen",
+  "indexers": "Indexers",
+  "load": "Laden",
+  "keyNote": "De API-sleutel staat in Prowlarr onder <b>Settings → General → Security</b>. Kies hierboven welke indexers je gebruikt — alle worden gebruikt tot je er een uitvinkt. Zolang dit aanstaat, worden je handmatig ingevoerde indexers genegeerd.",
+  "noIndexers": "Geen ingeschakelde indexers gevonden — voeg er toe en schakel ze in in Prowlarr.",
+  "enterUrl": "Voer eerst een Prowlarr-URL in.",
+  "loading": "Laden…",
+  "loadFailed": "Indexers konden niet worden geladen.",
+  "testing": "Testen…"
+}

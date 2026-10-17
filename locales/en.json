@@ -1,0 +1,16 @@
+{
+  "intro": "Feed the Usenet and Torrent sources with the indexers your Prowlarr instance manages. Finds releases only — a download client is still needed.",
+  "url": "Prowlarr URL",
+  "apiKey": "API key",
+  "categories": "Categories",
+  "categoriesNote": "Newznab/Torznab category ids searches are limited to (7000 = Books, 7030 = Comics). Blank searches without a category filter.",
+  "testConnection": "Test connection",
+  "indexers": "Indexers",
+  "load": "Load",
+  "keyNote": "The API key is in Prowlarr under <b>Settings → General → Security</b>. Choose which indexers to use above — all are used until you deselect some. While enabled, your manually entered indexers are ignored.",
+  "noIndexers": "No enabled indexers found — add and enable some in Prowlarr.",
+  "enterUrl": "Enter a Prowlarr URL first.",
+  "loading": "Loading…",
+  "loadFailed": "Failed to load indexers.",
+  "testing": "Testing…"
+}

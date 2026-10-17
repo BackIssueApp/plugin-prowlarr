@@ -8,6 +8,13 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+### Added
+
+- **Translated settings card.** The card's labels and notes follow the
+  language picked under Profile → Language on BackIssue builds newer than
+  0.9.0, and stay English on older ones. Translations ship for French, German,
+  Spanish, Italian, Portuguese and Dutch in `locales/`.
+
 ### Fixed
 
 - **The Categories field now sticks.** It was rendered on the card and honoured

@@ -1,0 +1,16 @@
+{
+  "intro": "Alimenta las fuentes Usenet y Torrent con los indexadores que gestiona tu instancia de Prowlarr. Solo encuentra lanzamientos: sigue haciendo falta un cliente de descarga.",
+  "url": "URL de Prowlarr",
+  "apiKey": "Clave API",
+  "categories": "Categorías",
+  "categoriesNote": "Ids de categoría Newznab/Torznab a los que se limitan las búsquedas (7000 = Libros, 7030 = Cómics). En blanco busca sin filtro de categoría.",
+  "testConnection": "Probar conexión",
+  "indexers": "Indexadores",
+  "load": "Cargar",
+  "keyNote": "La clave API está en Prowlarr en <b>Settings → General → Security</b>. Elige arriba qué indexadores usar: se usan todos hasta que desmarques alguno. Mientras esté activado, tus indexadores introducidos a mano se ignoran.",
+  "noIndexers": "No se encontraron indexadores activados: añade y activa algunos en Prowlarr.",
+  "enterUrl": "Introduce primero una URL de Prowlarr.",
+  "loading": "Cargando…",
+  "loadFailed": "No se pudieron cargar los indexadores.",
+  "testing": "Probando…"
+}

@@ -1,0 +1,16 @@
+{
+  "intro": "Versorgt die Usenet- und Torrent-Quellen mit den Indexern, die deine Prowlarr-Instanz verwaltet. Findet nur Releases — ein Download-Client wird weiterhin benötigt.",
+  "url": "Prowlarr-URL",
+  "apiKey": "API-Schlüssel",
+  "categories": "Kategorien",
+  "categoriesNote": "Newznab/Torznab-Kategorie-IDs, auf die Suchen beschränkt werden (7000 = Bücher, 7030 = Comics). Leer sucht ohne Kategoriefilter.",
+  "testConnection": "Verbindung testen",
+  "indexers": "Indexer",
+  "load": "Laden",
+  "keyNote": "Der API-Schlüssel steht in Prowlarr unter <b>Settings → General → Security</b>. Oben auswählen, welche Indexer verwendet werden — alle sind aktiv, bis einzelne abgewählt werden. Solange aktiviert, werden manuell eingetragene Indexer ignoriert.",
+  "noIndexers": "Keine aktivierten Indexer gefunden — in Prowlarr welche hinzufügen und aktivieren.",
+  "enterUrl": "Zuerst eine Prowlarr-URL eingeben.",
+  "loading": "Wird geladen…",
+  "loadFailed": "Indexer konnten nicht geladen werden.",
+  "testing": "Wird getestet…"
+}
