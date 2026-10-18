@@ -8,21 +8,25 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-10-17
+
 ### Added
 
 - **Translated settings card.** The card's labels and notes follow the
-  language picked under Profile → Language on BackIssue builds newer than
-  0.9.0, and stay English on older ones. Translations ship for French, German,
-  Spanish, Italian, Portuguese and Dutch in `locales/`.
-  Also covers the permission, job and library-type labels, the plugin
-  description and the notification titles shown in BackIssue’s own screens.
+  language picked under Profile → Language on BackIssue 0.9.1 and newer, and
+  stay English on older ones. Translations ship for French, German, Spanish,
+  Italian, Portuguese (Portugal and Brazil), Dutch, Polish, Japanese and
+  Simplified Chinese in `locales/`. Also covers the permission, job and
+  library-type labels, the plugin description and the notification titles
+  shown in BackIssue’s own screens.
 
 ### Fixed
 
-- **The Categories field now sticks.** It was rendered on the card and honoured
-  by searches, but never registered as a setting — so the app dropped the value
-  on save and every search fell back to the `7000,7030` default. Whatever you
-  type, including a blank field for no category filter, is now kept.
+- **The Categories field now sticks.** It was rendered on the card and
+  honoured by searches, but never registered as a setting — so the app dropped
+  the value on save and every search fell back to the `7000,7030` default.
+  Whatever you type, including a blank field for no category filter, is now
+  kept.
 
 ## [1.1.0] — 2026-07-21
 
